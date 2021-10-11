@@ -80,9 +80,13 @@ a {
 .header .header_menu {
   display: flex;
   padding: 0 10px;
+  align-items: center;
 }
 .header .header_menu .header_menu-item {
   list-style: none;
+}
+.header .header_menu .btn {
+  padding: 16px;
 }
 .header .header_menu .header_menu-item+.header_menu-item {
   margin-left: 19px;
