@@ -25,9 +25,4 @@ const httpPort = normalizePort(process.env.PORT) || 80;
 
 module.exports = {
   httpPort,
-  ws: {
-    origins: [
-      'http://localhost:80',
-    ],
-  },
 };

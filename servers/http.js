@@ -21,13 +21,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
+const { uri } = require('../config').db;
+
 app.use(session({
   secret: 'poijklmnb',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
   store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://admin:123123Qq@imtablefreecluster.asr7n.mongodb.net/store',
+    mongoUrl: uri,
   })
 }));
 

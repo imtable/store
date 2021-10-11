@@ -8,19 +8,12 @@ const generalSchema = new Schema({
       type: Schema.Types.String,
       maxlength: 100,
       required: true,
-      index: true
-   },
+      index: true,
+      unique: true
+   }
 });
 
 const modelName = path.basename(__filename, '.js');
 const model = mongoose.model(modelName, generalSchema);
 
 module.exports = model;
-
-// // Товар:
-// - картинка
-// - описание
-// - цена
-// - харавтеристики
-// - група товара (это варианты одного и тогоже товара)
-// Товар может быть в нескольких категориях сразу

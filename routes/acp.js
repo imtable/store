@@ -19,23 +19,31 @@ router.get('/getInitData', async function(req, res, next) {
   res.send({ categories });
 });
 
+router.post('/postCat', upload.none(), async function(req, res) {
+  console.log('req.body:', req.body);
+  const name = req.body.name;
+
+  const cat = await categoriesCtrl.createCategorie(name);
+  res.json(cat);
+});
+
 router.post('/postItem', itemPicCtrl.uploadPic(), async function(req, res) {
   console.log('req.body:', req.body);
-    const data = req.body;
-  
-    const itemId = await itemsCtrl.createItem(data);
-    res.json({ status: 'ok', payload: { itemId } });
+  const data = req.body;
+
+  const itemId = await itemsCtrl.createItem(data);
+  res.json({ status: 'ok', payload: { itemId } });
 });
 
 router.post('/postItemVersion', itemPicCtrl.uploadPic(), async function(req, res) {
   console.log('req.body:', req.body);
-    const data = req.body;
-    const itemId = data.itemId;
-  
-    const itemVersionId = await itemVersionsCtrl.createItemVersion(data);
-    await itemsCtrl.updateItemVersions(itemId, itemVersionId);
+  const data = req.body;
+  const itemId = data.itemId;
 
-    res.json({ status: 'ok', payload: { itemVersionId } });
+  const itemVersionId = await itemVersionsCtrl.createItemVersion(data);
+  await itemsCtrl.updateItemVersions(itemId, itemVersionId);
+
+  res.json({ status: 'ok', payload: { itemVersionId } });
 });
 
 module.exports = router;

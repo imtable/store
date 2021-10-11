@@ -227,7 +227,7 @@ const ctrls = {
                console.log(data.status);
                return;
             }
-            view.renderItems(data.payload);
+            view.renderItems(data.payload.items);
          });
       });
    },

@@ -77,6 +77,17 @@ const postItem = () => {
    });
 }
 
+const postCat = () => {
+   const form = document.forms.formCategorie;
+   form.addEventListener('submit', async (ev) => {
+      console.log('data');
+      ev.preventDefault();
+      const formData = new FormData(ev.target);
+      const { data } = await axios.post('/acp/postCat', formData);
+      console.log(data);
+   });
+}
+
 const postItemVersion = () => {
    const form = document.forms.formItemVersion;
    form.addEventListener('submit', async (ev) => {
@@ -93,5 +104,6 @@ const init = async () => {
    render(data);
    postItem();
    postItemVersion();
+   postCat();
 }
 init();
