@@ -49,35 +49,36 @@ const view = {
    },
    renderOneItem: function(item) {
       const itemInnerEl = document.querySelector('.oneGood');
-
       let html = '';
          html += `
             <div class="good_pic">
                <img src="${item.picture}" alt="good_pic">
             </div>
             <div class="good_inner">
-               <div class="good_row good_title">
-                  <h2>${item.name}</h2>
+               <div class="good_title">
+                  <h4>${item.name}</h4>
                </div>
                <div class="good_row good_desc">
-                  <p><span>description:</span>${item.description}</p>
+                  <h4>Description:</h4>
+                  <p>${item.description}</p>
                </div>
                <div class="good_row good_specs"></div>
-               <div class="good_row good_price">
-                  <h3>${item.price}</h3>
+               <div class="good_price">
+                  <h4>${item.price}$</h4>
                </div>
             </div>
          `;
          itemInnerEl.innerHTML = html;
 
       const goodSpecsEl = document.querySelector('.oneGood .good_specs');
-      const itemSpecs = item;
-      console.log(itemSpecs)
-      let htmlSpecs = '';
-      for (let el of itemSpecs) {
-         htmlSpecs += `<p>${el}</p>`;
+      const itemSpecs = item.specifications;
+      if (itemSpecs) {
+         let htmlSpecs = '<h4 class="">Specifications:</h4>';
+         for (const [key, value] of Object.entries(itemSpecs)) {
+            htmlSpecs += `<p><span>${key}: </span>${value}</p>`;
+         }
+         goodSpecsEl.innerHTML = htmlSpecs
       }
-      goodSpecsEl.innerHTML = htmlSpecs
    },
    run: (data) => {
       view.renderItems(data), view.renderCategories(data)
@@ -222,7 +223,6 @@ const ctrls = {
       categoriesEl.forEach(el => {
          el.addEventListener('click', async (ev) => {
             const { data } = await axios.post('/getItemsByCat', { catID: ev.target.dataset.id });
-            console.log(data)
             if ( !(data.status.includes('success')) ) {
                console.log(data.status);
                return;

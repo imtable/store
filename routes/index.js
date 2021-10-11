@@ -1,10 +1,10 @@
 var express = require('express');
 const multer = require('multer');
 
-const itemsCtrl = require('../controllers/itemsCtrl');
 const itemVersionsCtrl = require('../controllers/itemVersionsCtrl');
 const categoriesCtrl = require('../controllers/categoriesCtrl');
 const itemPicCtrl = require('../controllers/itemPicCtrl');
+const itemsCtrl = require('../controllers/itemsCtrl');
 const authCtrl = require('../controllers/authCtrl');
 
 const identifyMw = require('../mw/identifyMw');

@@ -15,6 +15,8 @@ a {
 }
 
 .container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 15px;
 }
 
@@ -87,6 +89,8 @@ a {
 }
 .header .header_menu .btn {
   padding: 16px;
+  width: 155px;
+  white-space: nowrap;
 }
 .header .header_menu .header_menu-item+.header_menu-item {
   margin-left: 19px;
@@ -273,9 +277,20 @@ main {
   width: 777px;
   margin: 0 auto;
   background-color:white;
-  padding: 44px;
+  padding: 22px;
+  gap: 55px;
 }
 .oneGood .good_inner {
+  padding: 22px;
+}
+.oneGood .good_title {
+  margin-bottom: 44px;
+}
+.oneGood .good_row {
+  border-bottom: 3px solid #caffb5;
+  padding-bottom: 3px;
+}
+.oneGood .good_pic {
   padding: 22px;
 }
 .oneGood .good_pic img {
@@ -286,7 +301,90 @@ main {
 }
 
 
+/* ACP */
+.acp_main {
+  padding: 33px;
+}
+.acp_main .acp_title {
+  background-color: lavender;
+  display: inline-block;
+  padding: 11px;
+}
+.acp_main .btn-spec-add {
+  margin-top: 11px;
+}
+.acp_main .acp_input {
+  width: 100%;
+}
+.acp_main .subouter {
+  border: 7px solid #4CAF50;
+  padding: 22px;
+  display: inline-block;
+  background-color: #fff;
+}
 
+.acp_main .item_outer {
+  display: flex;
+  gap: 33px;
+  justify-content: center;
+}
+
+.acp_main .formItem_spec-outer {
+  border: 3px solid lightseagreen;
+  padding: 11px;
+}
+
+.acp_main .formItemVersion_outer {
+  display: none;
+}
+
+.acp_main .formItemVersion .selectItemCategories {
+  display: none;
+}
+
+.acp_main .show {
+  display: block;
+}
+
+.acp_main .field {
+  display: block;
+  margin-top: 11px;
+}
+
+.acp_main .header {
+  margin-bottom: 11px;
+}
+
+.acp_main .formItem_inner {
+  /* display: flex; */
+}
+.acp_main .formItem_btn-submit {
+  margin-top: 22px;
+}
+
+.acp_main .inpItemSpecUnit {
+  display: block;
+  margin-top: 5px;
+}
+
+.acp_main .formItem_version-inner {
+  border: 7px solid darkcyan;
+  padding: 11px;
+  margin-top: 11px;
+}
+
+.acp_main .formItem_version-add {
+  margin-top: 22px;
+  margin-left: 11px;
+}
+.acp_main .categorie_outer {
+  width: 366px;
+  margin: 33px auto;
+}
+.acp_main .formCategorie_btn-submit {
+  margin-top: 22px;
+  display: block;
+}
 
 .hide {
   display: none;
