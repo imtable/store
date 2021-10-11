@@ -1,0 +1,80 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.outer {
+  padding: 33px;
+  border: 10px solid tan;
+  margin-top: 22px;
+}
+
+.subouter {
+  border: 7px solid lightseagreen;
+  padding: 22px;
+  display: inline-block;
+}
+
+.item_outer {
+  display: flex;
+  gap: 33px;
+  justify-content: center;
+}
+
+.formItem_spec-outer {
+  border: 3px solid lightseagreen;
+  padding: 11px;
+}
+
+.formItemVersion_outer {
+  display: none;
+}
+
+.formItemVersion .selectItemCategories {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.field {
+  display: block;
+  margin-top: 11px;
+}
+
+.header {
+  margin-bottom: 11px;
+}
+
+.formItem_inner {
+  /* display: flex; */
+}
+.formItem_btn-submit {
+  margin-top: 22px;
+}
+
+.inpItemSpecUnit {
+  display: block;
+  margin-top: 5px;
+}
+
+.formItem_version-inner {
+  border: 7px solid darkcyan;
+  padding: 11px;
+  margin-top: 11px;
+}
+
+.formItem_version-add {
+  margin-top: 22px;
+  margin-left: 11px;
+}
+
+.formCategorie_btn-submit {
+  margin-top: 22px;
+  display: block;
+}

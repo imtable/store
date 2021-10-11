@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>store</title>
+   <link rel="stylesheet" href="/stylesheets/style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+   <div class="wrapper">
+      <header class="header">
+         <div class="container header_container">
+            <div class="header_inner">
+               <div class="header_leftside">
+                  <a class="logo" href="/">
+                     <img src="/images/logo.png" alt="logo">
+                  </a>
+               </div>
+               <div class="header_middleside">
+                  <nav>
+                     <ul class="header_menu">
+                        <li class="header_menu-item categories">
+                           <div class="dropdown">
+                              <button class="dropbtn">Categories</button>
+                              <div class="dropdown-content">
+                                 <a href="#">categories</a>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                  </nav>
+               </div>
+               <div class="header_rightside">
+                  <div class="auth">
+                     <div class="logout">
+                        <button type="button" class=" btn logout_btn-logout">logout</button>
+                      </div>
+                      <div class="signing">
+                        <button type="button" class=" btn signing_btn-login">login</button>
+                        <button type="button" class=" btn signing_btn-reg">register</button>
+                        
+                        <div class="form_outer">
+                          <div class="userForm_outer userFormLogin_outer">
+                            <form name="userFormLogin" class="userForm">
+                              <input class="userForm_userName" type="text" name="userForm_login" placeholder="your login">
+                              <input class="userForm_userName" type="password" name="userForm_pwd" placeholder="your pwd">
+                              <button class=" btn userForm_btn" name="userForm" type="submit">login</button>
+                              <div class="error-outer"></div>
+                        </form>
+                          </div>
+                          
+                          <div class="userForm_outer userFormReg_outer">
+                            <form name="userFormReg" class="userForm">
+                              <input class="userForm_userName" required type="text" name="userForm_login" placeholder="your login">
+                              <input class="userForm_userName" required type="password" name="userForm_pwd" placeholder="your pwd">
+                              <input class="userForm_userName" required type="text" name="userForm_name" placeholder="your name">
+                              <button class=" btn userForm_btn" name="userForm" type="submit">register</button>
+                              <div class="error-outer"></div>
+                        </form>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <main>
+         <section class="section greet">
+            <div class="container">
+               <div class="goods">
+                  <div class="goods_heading">
+                     <h2>Products</h2>
+                  </div>
+                  <div class="goods_inner"></div>
+               </div>
+            </div>
+         </section>
+      </main>
+   </div>
+	<script src="javascripts/browser.js"></script>
+</body>
+</html>
+
+<!-- <div id="mobile-menu">
+   <div class="block">
+       <ul>
+           <li class="menu_item"><span class='anchor-1'>Sell</span></li>
+           <li class="menu_item"><span class='anchor-2'>Marketplace</span></li>
+           <li class="menu_item"><span class='anchor-3'>Community</span></li>
+           <li class="menu_item"><span>Develop</span></li>
+           <li class="menu_item"><span>Resources</span></li>
+           <a href="#" class="header_log-in">Log In</a>
+           <button class="header_btn btn md-trigger" data-modal='modal-1'>Get Started</button>
+           <img src="/images/icon-search.png" alt="" class="header_search">
+       </ul>
+   </div>
+</div> -->
+
+<!-- header_rightside -->
+<!-- <button id="burger-menu">
+   <div class="box box_item1"></div>
+   <div class="box box_item2"></div>
+   <div class="box box_item3"></div>
+</button> -->

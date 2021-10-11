@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>store acp</title>
+   <link rel="stylesheet" href="/stylesheets/styleAcp.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+   <h1>hello, admin</h1>
+
+   <div class="item_outer outer">
+      <div class="formItem_outer subouter">
+         <h2 class="formItem_header header">Add item to database</h2>
+         <div class="formItem_inner inner">
+            <form class="form formItem" name="formItem">
+               <select class="field selectItemCategories" name="categories" size="5" multiple="multiple" required>
+                  <option disabled>select categories: ctrl + click</option>
+               </select>
+               <input class="field" type="text" name="name" placeholder="name of item" required>
+               <input class="field" type="text" name="description" placeholder="description of item">
+               <input class="field" type="text" name="price" placeholder="price of item" required>
+               <input class="field inpPic" accept="image/*" type="file" name="picture" required>
+      
+               <div class="field formItem_spec-outer">
+                  <h3>add spec to item</h3>
+                  <input class="inpItemSpecName" type="text" placeholder="spec name of item">
+                  <button class="formItem_btn-spec-add btn-spec-add" type="button">add</button>
+                  <div class="formItem_spec-inner"></div>
+               </div>
+               <button class="formItem_btn-submit" type="submit">send</button>
+               <button class="formItem_version-add" type="button">add version</button>
+            </form>
+         </div>
+      </div>
+      
+      <div class="formItemVersion_outer subouter">
+         <h2 class="formItem_header header">Add version of item</h2>
+         <div class="formItem_inner inner">
+            <form class="form formItemVersion" name="formItemVersion">
+               <select class="field selectItemCategories" name="categories" size="5" multiple="multiple" required></select>
+               <input class="field" type="text" name="name" placeholder="name of item" required>
+               <input class="field" type="text" name="description" placeholder="description of item">
+               <input class="field" type="text" name="price" placeholder="price of item" required>
+               <input class="field inpPic" accept="image/*" type="file" name="picture" required>
+      
+               <div class="field formItem_spec-outer">
+                  <h3>add spec to item</h3>
+                  <input class="inpItemSpecName" type="text" placeholder="spec name of item">
+                  <button class="formItemVersion_btn-spec-add btn-spec-add" type="button">add</button>
+                  <div class="formItem_spec-inner"></div>
+               </div>
+               <button class="formItem_btn-submit" type="submit">send</button>
+            </form>
+         </div>
+      </div>
+   </div>
+
+   <div class="categorie_outer outer">
+      <div class="inner">
+         <h2 class="categorie_header header">Add categorie to database</h2>
+         <form class="form" name="formCategorie">
+            <input class="field" type="text" name="name" placeholder="name of categorie"> 
+            <button class="formCategorie_btn-submit" type="submit">send</button>
+         </form>
+      </div>
+   </div>
+	<script src="javascripts/browserAcp.js"></script>
+</body>
+</html>

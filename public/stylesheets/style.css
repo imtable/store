@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: gainsboro;
+  margin: 0;
+
+}
+
+a {
+  /* color: #00B7FF; */
+  text-decoration: none;
+}
+
+.container {
+  padding: 0 15px;
+}
+
+.btn {
+  font-size: 16px;
+  padding: 11px 22px;
+  background-color:#4CAF50;
+  color: white;
+  /* border: 2px solid black; */
+  /* border-radius: 5px; */
+  border: none;
+}
+.btn:hover {
+  background-color: #3e8e41;
+}
+
+.wrapper {
+  /* padding: 11px; */
+}
+
+.subouter {
+  border: 7px solid lightseagreen;
+  padding: 22px;
+  display: inline-block;
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  padding: 11px 0 10px 0;
+  background-color: lavender;
+}
+.header .header_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.header .header_leftside {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding-right: 10px;
+  width: 33.3%;
+}
+.header .header_middleside {
+  width: 33.3%;
+  display: flex;
+  justify-content: center;
+}
+.header .header_rightside {
+  width: 33.3%;
+  display: flex;
+  justify-content: flex-end;
+}
+.header .header_leftside .logo {
+  display: flex;
+  align-items: center;
+}
+.header .header_leftside .logo img {
+  max-width: 88px;
+}
+.header .header_menu {
+  display: flex;
+  padding: 0 10px;
+}
+.header .header_menu .header_menu-item {
+  list-style: none;
+}
+.header .header_menu .header_menu-item+.header_menu-item {
+  margin-left: 19px;
+}
+.header .header_menu .header_menu-item span {
+  padding: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  color: black;
+}
+.header .header_menu .header_menu-item span:hover,
+.header .header_menu .header_menu-item span:focus {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #7854F7;
+  color: white;
+}
+/* Style The Dropdown Button */
+ .header .dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 155px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+ .header .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+ .header .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 155px;
+}
+
+/* Links inside the dropdown */
+ .header .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+/* Change color of dropdown links on hover */
+ .header .dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+ .header .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+ .header .dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+
+.signing {
+  position: relative;
+}
+
+input {
+  padding: 9px;
+  font-size: 16px;
+  border: 2px solid #4CAF50;
+  width: 111px;
+}
+
+.error-outer {
+  position: absolute;
+}
+.error {
+  background-color:tomato;
+  padding: 15px;
+  margin: 11px 0;
+  color: white;
+}
+
+.userForm_outer {
+  display: none;
+  margin: 42px 0;
+}
+
+.userForm {
+  display: block;
+  /* margin: 11px; */
+}
+
+.auth {
+  
+}
+.form_outer {
+  position: absolute;
+  right: 0;
+  width: 555px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout {
+  display: none;
+}
+
+.header .header_rightside .header_search {
+  padding: 10px 10px;
+  margin-left: 9px;
+  max-width: 22px;
+}
+
+main {
+  /* background-color: gainsboro; */
+  padding: 55px 22px;
+  height: 100%;
+}
+
+.greet {
+  display: block;
+}
+
+.goods {
+  display: block;
+  background-color: #fff;
+  padding: 33px;
+}
+.goods .goods_heading {
+  text-align: center;
+}
+.goods .goods_heading h2 {
+  /* margin-top: 0; */
+}
+
+.goods_inner {
+  margin-top: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 122px;
+}
+
+.good {
+  display: inline-block;
+  /* margin: 33px 0; */
+}
+
+.good + .good {
+  /* margin-left: 33px; */
+}
+.good .good_pic img {
+  width: 222px;
+  height: 222px;
+  object-fit: contain;
+}
+
+.good_title {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.good_title a {
+  text-decoration: none;
+}
+
+.good_btn-outer {
+  text-align: center;
+  margin-top: 33px;
+}
+
+/* oneGood */
+.oneGood {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 777px;
+  margin: 0 auto;
+  background-color:white;
+  padding: 44px;
+}
+.oneGood .good_inner {
+  padding: 22px;
+}
+.oneGood .good_pic img {
+  width: 333px;
+}
+.oneGood .good_title h2 {
+  margin-bottom: 44px;
+}
+
+
+
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
