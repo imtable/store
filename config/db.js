@@ -1,6 +1,6 @@
 module.exports = {
-  uri: 'mongodb://localhost:27017/myapp',
-  options: {
+  uri: 'mongodb+srv://admin:123123Qq@imtablefreecluster.asr7n.mongodb.net/store',
+    options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
