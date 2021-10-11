@@ -27,7 +27,7 @@ module.exports = {
   httpPort,
   ws: {
     origins: [
-      'http://localhost:8000',
+      'http://localhost:80',
     ],
   },
 };
