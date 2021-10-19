@@ -1,8 +1,22 @@
 console.log('start');
 
-const USER = { name: '' }
-
 const model = {
+   USER: {},
+
+   // setUser: (user) => {
+   //    const json = JSON.stringify(user);
+   //    localStorage.setItem('user', json);
+   // },
+   // getUser: () => {
+   //    const json = localStorage.getItem('user');
+   //    const user = JSON.parse(json);
+   //    return user;
+   // },
+   setUserFromJwtToken: () => {
+      const json = localStorage.getItem('jwtToken');
+      const decodedJwtToken = jwt_decode(json);
+      model.USER = decodedJwtToken;
+   },
    homePage: async () => {
       const { data } = await axios.get('/homePage');
       return data;
@@ -14,6 +28,10 @@ const model = {
    getItemById: async () => {
       const href = window.location.href;
       const { data } = await axios.post(`${href}`);
+      return data;
+   },
+   getComments: async () => {
+      const { data } = await axios.get('/getComments');
       return data;
    },
 }
@@ -50,35 +68,53 @@ const view = {
    renderOneItem: function(item) {
       const itemInnerEl = document.querySelector('.oneGood');
       let html = '';
-         html += `
-            <div class="good_pic">
-               <img src="${item.picture}" alt="good_pic">
+      html += `
+         <div class="good_pic">
+            <img src="${item.picture}" alt="good_pic">
+         </div>
+         <div class="good_inner">
+            <div class="good_title">
+               <h2>${item.name}</h2>
             </div>
-            <div class="good_inner">
-               <div class="good_title">
-                  <h4>${item.name}</h4>
-               </div>
-               <div class="good_row good_desc">
-                  <h4>Description:</h4>
-                  <p>${item.description}</p>
-               </div>
-               <div class="good_row good_specs"></div>
-               <div class="good_price">
-                  <h4>${item.price}$</h4>
-               </div>
+            <div class="good_row good_desc">
+               <h4>Description:</h4>
+               <p>${item.description}</p>
             </div>
-         `;
-         itemInnerEl.innerHTML = html;
+            <div class="good_row good_specs hide"></div>
+            <div class="good_price">
+               <h4>${item.price}$</h4>
+            </div>
+         </div>
+      `;
+      itemInnerEl.innerHTML = html;
 
-      const goodSpecsEl = document.querySelector('.oneGood .good_specs');
       const itemSpecs = item.specifications;
       if (itemSpecs) {
+         const goodSpecsEl = document.querySelector('.oneGood .good_specs');
+         goodSpecsEl.classList.remove('hide');
          let htmlSpecs = '<h4 class="">Specifications:</h4>';
          for (const [key, value] of Object.entries(itemSpecs)) {
             htmlSpecs += `<p><span>${key}: </span>${value}</p>`;
          }
          goodSpecsEl.innerHTML = htmlSpecs
       }
+   },
+   renderComments: function(data) {
+      const showingComments = document.querySelector('.comments_inner').classList.toggle('show');
+      
+      let html = '';
+      for (const [key, value] of Object.entries(data)) {
+         html += `
+            <div class="comments_comment">
+               <p class="comments_comment-author">
+                  ${key}
+                  <span class="comments_comment-text">${value}</span>
+               </p>
+            </div>
+         `;
+      }
+      const commentsSubinnerEl = document.querySelector('.comments_subinner');
+      commentsSubinnerEl.innerHTML = html;
    },
    run: (data) => {
       view.renderItems(data), view.renderCategories(data)
@@ -87,19 +123,34 @@ const view = {
 
 const ctrls = {
    authModule: () => {
+      const getToken = () => {
+         const json = localStorage.getItem('jwtToken');
+         return json;
+      };
+
+      const setToken = (token) => {
+         const json = JSON.stringify(token);
+         localStorage.setItem('jwtToken', json);
+      };
+      const delToken = () => {
+         // localStorage.setItem('jwtToken', 'null');
+         localStorage.removeItem('jwtToken');
+      };
+
       const userIdentify = async () => {
-         const { data } = await axios.get('/userIdentify');
+         const jwtToken = getToken();
+         const { data } = await axios.post('/userIdentify', {jwtToken});
          if (data.status.includes('error')) {
-            console.log('user is not identify')
+            console.log(data.status);
             return;
          }
       
-         USER.name = data.payload.profile.name;
-         if (USER.name) {
-            console.log('welcome back', USER.name);
+         model.setUserFromJwtToken();
+         if (model.USER.name) {
+            console.log('welcome back', model.USER.name);
             const signingEl = document.querySelector('.signing').classList.add('hide');
             const logoutEl = document.querySelector('.logout').classList.add('show');
-   
+            renderSuccesIdentify(model.USER.name);
          }
       }
       
@@ -108,13 +159,14 @@ const ctrls = {
          form.addEventListener('submit', async (ev) => {
             ev.preventDefault();
             const formData = new FormData(ev.target);
-      
             const { data } = await axios.post('/userReg', formData);
-            if (data.status.includes('success')) {
+
+            if ( !(data.status.includes('success')) ) {
                console.log(data.status);
-               userIdentify();
+               return;
             }
             console.log(data.status);
+            window.location.reload();
          });
       }
       
@@ -124,26 +176,28 @@ const ctrls = {
             ev.preventDefault();
             const formData = new FormData(ev.target);
             const { data } = await axios.post('/userLogin', formData);
-            if (data.status.includes('success')) {
-               console.log(`${data.status}`);
-               USER.name = data.payload.profile.name;
-               window.location.reload();
+
+            if ( !(data.status.includes('success')) ) {
+               console.log(data.status);
+               renderError(data.status);
                return;
             }
-            console.log(data.status);
-            renderError(data.status);
+            const jwtToken = data.payload.token;
+            setToken(jwtToken);
+
+            window.location.reload();
          });
       }
       
       const userLogout = async () => {
          const btnLogoutEl = document.querySelector('.logout_btn-logout');
          btnLogoutEl.addEventListener('click', async (ev) => {
-            const { data } = await axios.get('/userLogout');
-            if (data.status.includes('success')) {
-               console.log(`${USER.name} logout success`);
-               USER.name = '';
+            // const { data } = await axios.get('/userLogout');
+            // if (data.status.includes('success')) {
+               // console.log(`${model.USER.name} logout success`);
+               delToken();
                window.location.reload();
-            }
+            // }
          });
       }
       
@@ -193,8 +247,14 @@ const ctrls = {
                         </div>`;
          showedUserFormEl.insertAdjacentHTML('beforeend', html);
       }
+
+      const renderSuccesIdentify = (userName) => {
+         const showedOuter = document.querySelector('.auth .logout.show');
+         const html = `<a href="/" class="logout_userName">${userName}</a>`;
+         showedOuter.insertAdjacentHTML('afterbegin', html);
+      }
       
-      const renderSigning = () => {
+      const renderAuthBlock = () => {
          const renderLogin = () => {
             const btnSigningEl = document.querySelector('.signing_btn-login');
             btnSigningEl.addEventListener('click', (ev) => {
@@ -216,7 +276,7 @@ const ctrls = {
       userReg();
       userLogin();
       userLogout();
-      renderSigning();
+      renderAuthBlock();
    },
    getItemsByCat: async () => {
       const categoriesEl = document.querySelectorAll('.header_menu .dropdown-content .dropdown-item');
@@ -230,8 +290,21 @@ const ctrls = {
             view.renderItems(data.payload.items);
          });
       });
+   },         
+   commentsShow: async () => {
+      const btnShowEl = document.querySelector('.comments_btn-show');
+      btnShowEl.addEventListener('click', async (ev) => {
+         const data = model.getComments();
+         if (!(data.status.includes('success'))) {
+            console.log(data.status);
+            return;
+         }
+         console.log(data.status);
+         view.renderComments(data.payload.comments);
+         // VOT TUT
+      });
    },
-   initCtrl: async () => {
+   init: async () => {
       const href = window.location.href;
       if (href.includes('items/')) {
          const item = await model.getItemById();
@@ -249,6 +322,6 @@ const ctrls = {
 }
 
 const init = async () => {
-   await ctrls.initCtrl();
+   await ctrls.init();
 }
 init();

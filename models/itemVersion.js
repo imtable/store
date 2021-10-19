@@ -21,6 +21,7 @@ const generalSchema = new Schema({
    },
    specifications: {
       type: Schema.Types.Mixed,
+      index: true,
       default: {}
    },
    price: {
@@ -29,7 +30,8 @@ const generalSchema = new Schema({
       required: true
    },
    categories: [{
-      type: Schema.Types.ObjectId, ref: 'categorie'
+      type: Schema.Types.ObjectId, ref: 'categorie',
+      index: true,
    }]
 });
 

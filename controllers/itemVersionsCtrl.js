@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-require('../bin/runners/db')
 
 const ItemVersionModel = require('../models/itemVersion');
 

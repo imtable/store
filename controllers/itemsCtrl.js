@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-require('../bin/runners/db')
 
 const GeneralModel = require('../models/item');
 
@@ -62,8 +61,8 @@ const updateItemVersions = async (itemId, itemVersionId) => {
   });
 }
 
-const getItemsByCategorieID = async (catID) => {
-  const items = await GeneralModel.find({ categories: catID });
+const getItemsByCategorieId = async (catId) => {
+  const items = await GeneralModel.find({ categories: catId });
   if (!items) {
     console.log('= = = = get error: items is not finded');
     return { status: 'get error: items is not finded' };
@@ -73,7 +72,7 @@ const getItemsByCategorieID = async (catID) => {
   return { status: 'success', payload: { items } };
 }
 
-const getItemByID = async (id) => {
+const getItemById = async (id) => {
   const item = await GeneralModel.findOne({ _id: id });
   if (!item) {
     console.log('= = = = get error: item is not finded');
@@ -88,6 +87,6 @@ module.exports = {
   getItems,
   createItem,
   updateItemVersions,
-  getItemsByCategorieID,
-  getItemByID
+  getItemsByCategorieId,
+  getItemById
 };

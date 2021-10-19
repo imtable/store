@@ -21,6 +21,7 @@ const generalSchema = new Schema({
    },
    specifications: {
       type: Schema.Types.Mixed,
+      index: true,
       default: {}
    },
    price: {
@@ -29,10 +30,12 @@ const generalSchema = new Schema({
       required: true
    },
    itemVersions: [{
-      type: Schema.Types.ObjectId, ref: 'itemVersion'
+      type: Schema.Types.ObjectId, ref: 'itemVersion',
+      index: true,
    }],
    categories: [{
-      type: Schema.Types.ObjectId, ref: 'categorie'
+      type: Schema.Types.ObjectId, ref: 'categorie',
+      index: true,
    }]
 });
 
@@ -40,13 +43,3 @@ const modelName = path.basename(__filename, '.js');
 const model = mongoose.model(modelName, generalSchema);
 
 module.exports = model;
-
-// // Товар:
-// - картинка
-// - описание
-// - цена
-// - характеристики
-// категории товара
-// - группа товара (это варианты одного и того же товара)
-
-// Товар может быть в нескольких категориях сразу

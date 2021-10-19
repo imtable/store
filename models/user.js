@@ -9,10 +9,11 @@ const generalSchema = new Schema({
       type: Schema.Types.String,
       maxlength: 100,
       index: true,
+      required: true
    },
    auth: {
-      login: { type: Schema.Types.String, require: true, unique: true, index: true, maxlength: 33 },
-      hashedPwd: { type: Schema.Types.String, require: true, index: true, maxlength: 111 }
+      login: { type: Schema.Types.String, required: true, unique: true, index: true, maxlength: 33 },
+      hashedPwd: { type: Schema.Types.String, required: true, index: true, maxlength: 111 }
    }
 });
 

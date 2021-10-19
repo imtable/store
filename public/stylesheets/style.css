@@ -206,6 +206,14 @@ input {
   display: none;
 }
 
+.logout_userName {
+  /* margin-right: 5px; */
+  color: #4CAF50;
+  /* background-color: #4CAF50; */
+  border-bottom: 2px solid #4CAF50;
+  /* padding: 5px; */
+}
+
 .header .header_rightside .header_search {
   padding: 10px 10px;
   margin-left: 9px;
@@ -298,6 +306,32 @@ main {
 }
 .oneGood .good_title h2 {
   margin-bottom: 44px;
+}
+
+.comments {
+  display: block;
+  margin: 33px auto;
+  width: 666px;
+  padding: 22px;
+}
+
+.comments_inner {
+  margin-top: 11px;
+  background-color: #fff;
+  padding: 22px;
+  display: none;
+}
+
+.comments_btn-show-outer {
+  text-align: center;
+}
+
+.comments_post-input {
+  min-width: 100%;
+}
+
+.comments_btn-post {
+  margin-top: 5px;
 }
 
 
