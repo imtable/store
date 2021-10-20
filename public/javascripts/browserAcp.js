@@ -1,6 +1,40 @@
 console.log('start');
 
-const USER = { name: '' }
+const model = {
+   USER: {},
+
+   // setUser: (user) => {
+   //    const json = JSON.stringify(user);
+   //    localStorage.setItem('user', json);
+   // },
+   // getUser: () => {
+   //    const json = localStorage.getItem('user');
+   //    const user = JSON.parse(json);
+   //    return user;
+   // },
+   setUserFromJwtToken: () => {
+      const json = localStorage.getItem('jwtToken');
+      const decodedJwtToken = jwt_decode(json);
+      model.USER = decodedJwtToken;
+   },
+   homePage: async () => {
+      const { data } = await axios.get('/homePage');
+      return data;
+   },
+   getCats: async () => {
+      const { data } = await axios.get('/getCats');
+      return data;
+   },
+   getItemById: async () => {
+      const href = window.location.href;
+      const { data } = await axios.post(`${href}`);
+      return data;
+   },
+   getComments: async () => {
+      const { data } = await axios.get('/getComments');
+      return data;
+   },
+}
 
 const getInitData = async () => {
    const { data } = await axios.get('/acp/getInitData');
@@ -101,20 +135,171 @@ const postItemVersion = () => {
    });
 }
 
+// const authModule = () => {
+//    const userIdentify = async () => {
+//       const { data } = await axios.get('/userIdentify');
+//       if (data.status.includes('error')) {
+//          console.log('user is not identify')
+//          return;
+//       }
+   
+//       USER.name = data.payload.profile.name;
+//       if (USER.name) {
+//          console.log('welcome back', USER.name);
+//          const signingEl = document.querySelector('.signing').classList.add('hide');
+//          const logoutEl = document.querySelector('.logout').classList.add('show');
+
+//       }
+//    }
+   
+//    const userReg = async () => {
+//       const form = document.forms.userFormReg;
+//       form.addEventListener('submit', async (ev) => {
+//          ev.preventDefault();
+//          const formData = new FormData(ev.target);
+   
+//          const { data } = await axios.post('/userReg', formData);
+//          if (data.status.includes('success')) {
+//             console.log(data.status);
+//             userIdentify();
+//          }
+//          console.log(data.status);
+//       });
+//    }
+   
+//    const userLogin = async () => {
+//       const form = document.forms.userFormLogin;
+//       form.addEventListener('submit', async (ev) => {
+//          ev.preventDefault();
+//          const formData = new FormData(ev.target);
+//          const { data } = await axios.post('/userLogin', formData);
+//          if (data.status.includes('success')) {
+//             console.log(`${data.status}`);
+//             USER.name = data.payload.profile.name;
+//             window.location.reload();
+//             return;
+//          }
+//          console.log(data.status);
+//          renderError(data.status);
+//       });
+//    }
+   
+//    const userLogout = async () => {
+//       const btnLogoutEl = document.querySelector('.logout_btn-logout');
+//       btnLogoutEl.addEventListener('click', async (ev) => {
+//          const { data } = await axios.get('/userLogout');
+//          if (data.status.includes('success')) {
+//             console.log(`${USER.name} logout success`);
+//             USER.name = '';
+//             window.location.reload();
+//          }
+//       });
+//    }
+   
+//    function fadeRemove(elem, t, f){
+//      // кадров в секунду (по умолчанию 50)
+//      var fps = f || 50; 
+//      // время работы анимации (по умолчанию 500мс)
+//      var time = t || 500; 
+//      // сколько всего покажем кадров
+//      var steps = time / (1000 / fps);   
+//      // текущее значение opacity - изначально 0
+//      var op = 1;
+//      // изменение прозрачности за 1 кадр
+//      var d0 = op / steps;
+     
+//      // устанавливаем интервал (1000 / fps) 
+//      // например, 50fps -> 1000 / 50 = 20мс  
+//      var timer = setInterval(function(){
+//        // уменьшаем текущее значение opacity
+//        op -= d0;
+//        // устанавливаем opacity элементу DOM
+//        elem.style.opacity = op;
+//        // уменьшаем количество оставшихся шагов анимации
+//        steps--;
+       
+//        // если анимация окончена
+//        if(steps <= 0){
+//          // убираем интервал выполнения
+//          clearInterval(timer);
+//          // и убираем элемент из потока документа
+//          elem.remove();
+//          // elem.style.display = 'none';
+//        }
+//      }, (1000 / fps));
+//    }
+   
+//    const renderError = (status) => {
+//       const errorEl = document.querySelectorAll('.error');
+//       if (errorEl) {
+//          errorEl.forEach(element => {
+//             fadeRemove(element, 444, 60);
+//          });
+//       }
+//       const showedUserFormEl = document.querySelector('.userForm_outer.show .error-outer');
+//       const html =   `<div class="error">
+//                         <span class="error-text">${status}</span>
+//                      </div>`;
+//       showedUserFormEl.insertAdjacentHTML('beforeend', html);
+//    }
+   
+//    const renderSigning = () => {
+//       const renderLogin = () => {
+//          const btnSigningEl = document.querySelector('.signing_btn-login');
+//          btnSigningEl.addEventListener('click', (ev) => {
+//             const showing = document.querySelector('.userFormLogin_outer').classList.add('show');
+//             const unshowing = document.querySelector('.userFormReg_outer').classList.remove('show');
+//          });
+//       }
+//       const renderReg = () => {
+//          const btnSigningEl = document.querySelector('.signing_btn-reg');
+//          btnSigningEl.addEventListener('click', (ev) => {
+//             const showing = document.querySelector('.userFormReg_outer').classList.add('show');
+//             const unshowing = document.querySelector('.userFormLogin_outer').classList.remove('show');
+//          });
+//       }
+//       renderLogin();
+//       renderReg();
+//    }
+//    userIdentify();
+//    userReg();
+//    userLogin();
+//    userLogout();
+//    renderSigning();
+// }
+
 const authModule = () => {
+   const getToken = () => {
+      const json = localStorage.getItem('jwtToken');
+      return json;
+   };
+
+   const setToken = (token) => {
+      const json = JSON.stringify(token);
+      localStorage.setItem('jwtToken', json);
+   };
+   const delToken = () => {
+      // localStorage.setItem('jwtToken', 'null');
+      localStorage.removeItem('jwtToken');
+   };
+
    const userIdentify = async () => {
-      const { data } = await axios.get('/userIdentify');
+      const jwtToken = getToken();
+      if (!jwtToken) {
+         return;
+      }
+      const { data } = await axios.post('/userIdentify', {jwtToken});
       if (data.status.includes('error')) {
-         console.log('user is not identify')
+         console.log(data.status);
          return;
       }
    
-      USER.name = data.payload.profile.name;
-      if (USER.name) {
-         console.log('welcome back', USER.name);
+      model.setUserFromJwtToken();
+      if (model.USER.name) {
+         console.log('welcome back', model.USER.name);
          const signingEl = document.querySelector('.signing').classList.add('hide');
          const logoutEl = document.querySelector('.logout').classList.add('show');
-
+         renderSuccesIdentify(model.USER.name);
       }
    }
    
@@ -123,13 +308,14 @@ const authModule = () => {
       form.addEventListener('submit', async (ev) => {
          ev.preventDefault();
          const formData = new FormData(ev.target);
-   
          const { data } = await axios.post('/userReg', formData);
-         if (data.status.includes('success')) {
+
+         if ( !(data.status.includes('success')) ) {
             console.log(data.status);
-            userIdentify();
+            return;
          }
          console.log(data.status);
+         window.location.reload();
       });
    }
    
@@ -139,26 +325,28 @@ const authModule = () => {
          ev.preventDefault();
          const formData = new FormData(ev.target);
          const { data } = await axios.post('/userLogin', formData);
-         if (data.status.includes('success')) {
-            console.log(`${data.status}`);
-            USER.name = data.payload.profile.name;
-            window.location.reload();
+
+         if ( !(data.status.includes('success')) ) {
+            console.log(data.status);
+            renderError(data.status);
             return;
          }
-         console.log(data.status);
-         renderError(data.status);
+         const jwtToken = data.payload.token;
+         setToken(jwtToken);
+
+         window.location.reload();
       });
    }
    
    const userLogout = async () => {
       const btnLogoutEl = document.querySelector('.logout_btn-logout');
       btnLogoutEl.addEventListener('click', async (ev) => {
-         const { data } = await axios.get('/userLogout');
-         if (data.status.includes('success')) {
-            console.log(`${USER.name} logout success`);
-            USER.name = '';
+         // const { data } = await axios.get('/userLogout');
+         // if (data.status.includes('success')) {
+            // console.log(`${model.USER.name} logout success`);
+            delToken();
             window.location.reload();
-         }
+         // }
       });
    }
    
@@ -208,8 +396,14 @@ const authModule = () => {
                      </div>`;
       showedUserFormEl.insertAdjacentHTML('beforeend', html);
    }
+
+   const renderSuccesIdentify = (userName) => {
+      const showedOuter = document.querySelector('.auth .logout.show');
+      const html = `<a href="/" class="logout_userName">${userName}</a>`;
+      showedOuter.insertAdjacentHTML('afterbegin', html);
+   }
    
-   const renderSigning = () => {
+   const renderAuthBlock = () => {
       const renderLogin = () => {
          const btnSigningEl = document.querySelector('.signing_btn-login');
          btnSigningEl.addEventListener('click', (ev) => {
@@ -231,7 +425,7 @@ const authModule = () => {
    userReg();
    userLogin();
    userLogout();
-   renderSigning();
+   renderAuthBlock();
 }
 
 const init = async () => {

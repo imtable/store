@@ -39,8 +39,11 @@ const getFileByHash = async (hashsum) => {
 }
 
 const checkExisting = async (req, res, next) => {
+  if (!req.hasOwnProperty('file')) {
+    next();
+    return;
+  }
   const { path: filePath } = req.file;
-  console.log(req.file)
 
   const hashsum = await calcHash(filePath);
   const { hashedFilePath, shortFilePath } = await getFileByHash(hashsum);

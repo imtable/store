@@ -139,6 +139,9 @@ const ctrls = {
 
       const userIdentify = async () => {
          const jwtToken = getToken();
+         if (!jwtToken) {
+            return;
+         }
          const { data } = await axios.post('/userIdentify', {jwtToken});
          if (data.status.includes('error')) {
             console.log(data.status);

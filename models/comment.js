@@ -7,7 +7,8 @@ const { Schema } = mongoose;
 
 const generalSchema = new Schema({
    authorId: { 
-      type: Schema.Types.ObjectId, ref: 'user',
+      type: Schema.Types.ObjectId, 
+      ref: 'user',
       required: true,
       index: true,
    },
@@ -16,7 +17,8 @@ const generalSchema = new Schema({
       required: true,
    },
    itemId: { 
-      type: Schema.Types.ObjectId, ref: 'item',
+      type: Schema.Types.ObjectId, 
+      ref: 'item',
       required: true,
       index: true,
    }
