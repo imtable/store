@@ -1,5 +1,5 @@
 module.exports = {
-  uri: 'mongodb+srv://admin:123123Qq@imtablefreecluster.asr7n.mongodb.net/store',
+  uri: 'mongodb+srv://admin:admin@imtablefreecluster.asr7n.mongodb.net/store',
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,
